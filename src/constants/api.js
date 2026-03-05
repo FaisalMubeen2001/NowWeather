@@ -1,4 +1,4 @@
-export const API_KEY = "95eefe20a6b4dbc749eebd074b6a3533";
+export const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const BASE_URL = "https://api.openweathermap.org/data/2.5";
 export const GEO_URL = "https://api.openweathermap.org/geo/1.0";
