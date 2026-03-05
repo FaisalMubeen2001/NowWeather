@@ -15,7 +15,10 @@ export const getWeatherCondition = (weatherCode, icon) => {
   return "clear-day";
 };
 
-export const formatTemperature = (temp) => {
+export const formatTemperature = (temp, unit = "metric") => {
+  if (unit === "imperial") {
+    return `${Math.round((temp * 9) / 5 + 32)}°F`;
+  }
   return `${Math.round(temp)}°C`;
 };
 
@@ -71,6 +74,31 @@ export const groupForecastByDay = (forecastList) => {
 
 export const isDay = (sunrise, sunset, current) => {
   return current >= sunrise && current <= sunset;
+};
+
+export const getCityTime = (timezoneOffset) => {
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  const cityTime = new Date(utc + timezoneOffset * 1000);
+
+  const hours = cityTime.getHours();
+  const minutes = cityTime.getMinutes().toString().padStart(2, "0");
+  const seconds = cityTime.getSeconds().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const displayHours = (hours % 12 || 12).toString().padStart(2, "0");
+
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const dayName = days[cityTime.getDay()];
+  const date = cityTime.getDate();
+  const month = months[cityTime.getMonth()];
+  const year = cityTime.getFullYear();
+
+  return {
+    time: `${displayHours}:${minutes}:${seconds} ${ampm}`,
+    date: `${dayName}, ${date} ${month} ${year}`,
+  };
 };
 
 export const fetchCitySuggestions = async (query) => {

@@ -14,6 +14,8 @@ const App = () => {
     hourlyForecast,
     loading,
     error,
+    unit,
+    toggleUnit,
     searchCity,
   } = useWeather();
 
@@ -51,12 +53,20 @@ const App = () => {
 
         {!loading && currentWeather && (
           <div className="weather-content">
-            <CurrentWeather data={currentWeather} />
+            <CurrentWeather
+              data={currentWeather}
+              unit={unit}
+              toggleUnit={toggleUnit}
+            />
             <HourlyForecast
               data={hourlyForecast}
               timezone={currentWeather.timezone}
+              unit={unit}
             />
-            <DailyForecast data={forecast} />
+            <DailyForecast
+              data={forecast}
+              unit={unit}
+            />
           </div>
         )}
       </div>

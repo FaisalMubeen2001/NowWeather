@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { API_KEY, ENDPOINTS, DEFAULT_CITY, UNITS } from "../constants/api";
+import { API_KEY, ENDPOINTS, DEFAULT_CITY } from "../constants/api";
 import { groupForecastByDay } from "../utils/weatherHelpers";
 
 const useWeather = () => {
@@ -10,6 +10,7 @@ const useWeather = () => {
   const [hourlyForecast, setHourlyForecast] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [unit, setUnit] = useState("metric");
 
   const fetchWeather = useCallback(async (searchCity) => {
     setLoading(true);
@@ -21,14 +22,14 @@ const useWeather = () => {
           params: {
             q: searchCity,
             appid: API_KEY,
-            units: UNITS,
+            units: "metric",
           },
         }),
         axios.get(ENDPOINTS.forecast, {
           params: {
             q: searchCity,
             appid: API_KEY,
-            units: UNITS,
+            units: "metric",
           },
         }),
       ]);
@@ -58,12 +59,18 @@ const useWeather = () => {
     fetchWeather(newCity);
   };
 
+  const toggleUnit = () => {
+  setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
+};
+
   return {
     currentWeather,
     forecast,
     hourlyForecast,
     loading,
     error,
+    unit,
+    toggleUnit,
     searchCity,
   };
 };
