@@ -5,7 +5,7 @@ A modern, real-time weather application built with React and Vite. Features a st
 ![WeatherNow](https://img.shields.io/badge/React-18-blue?logo=react) ![Vite](https://img.shields.io/badge/Vite-5-purple?logo=vite) ![Tests](https://img.shields.io/badge/Tests-31%20passing-brightgreen)
 
 ## 🌐 Live Demo
-[View Live on Netlify](https://weatherapp-nowweather.netlify.app/))
+[View Live on Netlify](https://weatherapp-nowweather.netlify.app/)
 
 ## ✨ Features
 - 🔍 City search with autocomplete suggestions
